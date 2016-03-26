@@ -1,0 +1,40 @@
+PODS:
+  - ASProgressPopUpView (0.8)
+  - AYVibrantButton (1.0.3)
+  - CBStoreHouseRefreshControl (1.0)
+  - CBZSplashView (1.0.0)
+  - CNPPopupController (0.3.1)
+  - DynamicButton (1.8.0)
+  - Font-Awesome-Swift (1.4.6)
+  - JBKenBurnsView (1.0)
+  - MSTwitterSplashScreen (1.0.6)
+  - PulsingHalo (0.1.0)
+  - RKNotificationHub (2.0.1)
+
+DEPENDENCIES:
+  - ASProgressPopUpView
+  - AYVibrantButton
+  - CBStoreHouseRefreshControl
+  - CBZSplashView (~> 1.0.0)
+  - CNPPopupController
+  - DynamicButton (~> 1.8.0)
+  - Font-Awesome-Swift (~> 1.4.6)
+  - JBKenBurnsView
+  - MSTwitterSplashScreen (~> 1.0.6)
+  - PulsingHalo
+  - RKNotificationHub
+
+SPEC CHECKSUMS:
+  ASProgressPopUpView: 945c19297da09a625db48a5a37cabd7756916b9b
+  AYVibrantButton: 7cc5b2c74f6f6a0a52d5b0db361a9d3b755bc448
+  CBStoreHouseRefreshControl: a814bd725e74ff4c1e8dd96eb02358199b0da04f
+  CBZSplashView: 9ce4cba22024476ff4a97d6433e7347da6376016
+  CNPPopupController: 67dc2ca5a3f88cd49a27bb1b0aeb78a24d423d79
+  DynamicButton: a5b3d7a45564fe5679530b9025ef73f7e369e688
+  Font-Awesome-Swift: a965c23e619514be65de9b113f49038ca683c1bb
+  JBKenBurnsView: e40d10fcd4fbeb652c29fa431d4748780a4672ff
+  MSTwitterSplashScreen: db3eaefa2b71b731b7497921e9f4cf8cc981f27a
+  PulsingHalo: d2684152281a3f7398b9554734b9a4f8feb9129a
+  RKNotificationHub: d80905a948c79c11673345f807133a0bfd17e320
+
+COCOAPODS: 0.39.0

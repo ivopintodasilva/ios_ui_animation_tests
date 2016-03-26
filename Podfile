@@ -11,5 +11,7 @@ target 'resume_tutorial_style' do
     pod 'JBKenBurnsView'
     pod 'CBZSplashView', '~> 1.0.0'
     pod 'MSTwitterSplashScreen', '~> 1.0.6'
+    pod 'DynamicButton', '~> 1.8.0'
+    pod 'CNPPopupController'
 end
 

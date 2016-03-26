@@ -10,6 +10,7 @@ import UIKit
 import CBStoreHouseRefreshControl
 import JBKenBurnsView
 
+
 class SecondViewController: UIViewController, UIScrollViewDelegate {
     
     var scrollView: UIScrollView!
@@ -47,11 +48,17 @@ class SecondViewController: UIViewController, UIScrollViewDelegate {
         image_view.center.x = UIScreen.mainScreen().bounds.width/2
         image_view.center.y = (UIScreen.mainScreen().bounds.height/2)-7
         self.view.addSubview(image_view)
-        
         self.view.addSubview(label)
         
         
-
+        let s_label = UILabel(frame: CGRectMake(0, 0, 300, 30))
+        s_label.center = CGPointMake((UIScreen.mainScreen().bounds.width)/2, (UIScreen.mainScreen().bounds.height) - 60 )
+        s_label.text = "Get your swipe on"
+        s_label.textColor = UIColor.whiteColor()
+        s_label.textAlignment = NSTextAlignment.Center
+        s_label.font = UIFont(name: "Avenir-Light", size: 16)
+        
+        self.view.addSubview(s_label)
         
     }
 

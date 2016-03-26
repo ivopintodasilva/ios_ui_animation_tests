@@ -10,6 +10,8 @@ import UIKit
 
 class PageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
+    var pageControl: UIPageControl? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,6 +22,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
             direction: .Forward,
             animated: true,
             completion: nil)
+        
         
     }
     
@@ -55,6 +58,16 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
                 return nil
             }
     }
+    
+    
+    //func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+    //    pageViewController.view.backgroundColor = UIColor.clearColor()
+    //    return 3
+    //}
+    
+    //func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+    //    return 0
+    //}
     
     
     

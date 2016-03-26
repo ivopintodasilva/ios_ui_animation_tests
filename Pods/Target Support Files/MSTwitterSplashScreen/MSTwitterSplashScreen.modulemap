@@ -1,0 +1,6 @@
+framework module MSTwitterSplashScreen {
+  umbrella header "MSTwitterSplashScreen-umbrella.h"
+
+  export *
+  module * { export * }
+}

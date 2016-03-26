@@ -12,13 +12,21 @@ import Font_Awesome_Swift
 import RKNotificationHub
 import AYVibrantButton
 import ASProgressPopUpView
+import DynamicButton
+import CNPPopupController
 
 class FirstViewController: UIViewController {
     
     var scrollView: UIScrollView!
     var hub: RKNotificationHub!
     var invertButton: AYVibrantButton!
+    var dynamicButton: DynamicButton!
+    var s_label: UILabel!
+    var progress_view: ASProgressPopUpView!
+    var blurEffectView: UIVisualEffectView!
+    var popup: CNPPopupController!
     var i = 0
+    var j = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,7 +143,7 @@ class FirstViewController: UIViewController {
         invertButton.backgroundColor = UIColor.whiteColor()
         invertButton.font = UIFont(name: "Avenir-Heavy", size: 21)
         /*  set listener for button  */
-        invertButton.addTarget(self, action: "buttonClicked:", forControlEvents: .TouchUpInside)
+        invertButton.addTarget(self, action: #selector(FirstViewController.buttonClicked(_:)), forControlEvents: .TouchUpInside)
         scrollView.addSubview(invertButton)
         /*  set notification hub on button  */
         hub = RKNotificationHub(view: invertButton)
@@ -151,21 +159,20 @@ class FirstViewController: UIViewController {
         hub.increment()
         hub.pop()
         if i == 0{
-            i += 1
             invertButton.text = "Oh no you didn't!"
         }else if i == 1{
-            i += 1
-            invertButton.text = "Second strike..."
+            invertButton.text = "Strike 2!"
         }else if i == 2{
             if !UIAccessibilityIsReduceTransparencyEnabled() {
                 self.view.backgroundColor = UIColor.clearColor()
                 let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-                let blurEffectView = UIVisualEffectView(effect: blurEffect)
+                blurEffectView = UIVisualEffectView(effect: blurEffect)
                 blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
                 blurEffectView.frame = self.view.bounds
+                blurEffectView.tag = 99
                 
                 UIView.transitionWithView(self.view!, duration: 0.3, options: .TransitionCrossDissolve, animations: {() -> Void in
-                    self.view.addSubview(blurEffectView)
+                    self.view.addSubview(self.blurEffectView)
                     }, completion: { _ in })
 
                 
@@ -175,7 +182,7 @@ class FirstViewController: UIViewController {
             }
             
             
-            let progress_view = ASProgressPopUpView(frame: CGRect(x: 20, y: UIScreen.mainScreen().bounds.height/2, width: UIScreen.mainScreen().bounds.width-40, height: 40))
+            progress_view = ASProgressPopUpView(frame: CGRect(x: 20, y: UIScreen.mainScreen().bounds.height/2, width: UIScreen.mainScreen().bounds.width-40, height: 40))
             self.view.addSubview(progress_view)
             progress_view.font = UIFont(name: "Avenir", size: 26)
             progress_view.textColor = UIColor.blackColor()
@@ -183,18 +190,75 @@ class FirstViewController: UIViewController {
             progress_view.popUpViewCornerRadius = 16.0
             progress_view.showPopUpViewAnimated(true)
             progress_view.progress = 0.99
+            progress_view.tag = 100
             
             
-            let s_label = UILabel(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.width-50, 60))
+            s_label = UILabel(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.width-50, 60))
             s_label.center = CGPointMake(UIScreen.mainScreen().bounds.width/2, (UIScreen.mainScreen().bounds.height/2) + 30)
             s_label.textAlignment = NSTextAlignment.Center
             s_label.textColor = UIColor.whiteColor()
             s_label.text = "Deleting your Github account"
             s_label.font = UIFont(name: "Avenir-HeavyOblique", size: 18)
+            s_label.tag == 101
             self.view.addSubview(s_label)
             
             
+            dynamicButton = DynamicButton(style: .CircleClose)
+            dynamicButton.strokeColor = UIColor.whiteColor()
+            dynamicButton.highlightStokeColor = UIColor.redColor()
+            dynamicButton.center = CGPointMake(UIScreen.mainScreen().bounds.width/2, (UIScreen.mainScreen().bounds.height) - 50)
+            dynamicButton.addTarget(self, action: #selector(FirstViewController.dynamicButtonClicked(_:)), forControlEvents: .TouchUpInside)
+            dynamicButton.tag = 102
+            self.view.addSubview(dynamicButton)
+            
+            
         }
+        else if i == 9{
+            
+            let titleLabel: UILabel = UILabel()
+            titleLabel.numberOfLines = 0
+            titleLabel.attributedText = NSAttributedString(string:"Daaamn")
+            titleLabel.font = UIFont(name: "Avenir-Heavy", size: 22)
+            titleLabel.textAlignment = NSTextAlignment.Center
+            
+            
+            let lineOneLabel: UILabel = UILabel()
+            lineOneLabel.numberOfLines = 0
+            lineOneLabel.attributedText = NSAttributedString(string:"You really like notifications!")
+            lineOneLabel.font = UIFont(name: "Avenir", size: 18)
+            lineOneLabel.textAlignment = NSTextAlignment.Center
+            
+            let customView: UIView = UIView(frame: CGRectMake(0, 0, 250, 55))
+            customView.backgroundColor = UIColor.lightGrayColor()
+
+
+            popup = CNPPopupController(contents: [titleLabel, lineOneLabel])
+            //popup.theme = (CNPPopupTheme.defaultTheme)
+            popup.presentPopupControllerAnimated(true)
+            
+        }
+        i += 1
+    }
+    
+    func dynamicButtonClicked(sender: AnyObject?) {
+        if j == 0{
+            dynamicButton.setStyle(.CheckMark, animated: true)
+            dynamicButton.highlightStokeColor = UIColor.greenColor()
+            j += 1
+        }else if j == 1{
+            for v in view.subviews{
+                if v.tag == 99 || v.tag == 100 || v.tag == 101 || v.tag == 102{
+                    
+                    UIView.transitionWithView(self.view!, duration: 0.3, options: .TransitionCrossDissolve, animations: {() -> Void in
+                        v.removeFromSuperview()
+                        }, completion: { _ in })
+                    
+                }
+                s_label.text = ""
+            }
+            invertButton.text = "JK, click me!"
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -205,8 +269,6 @@ class FirstViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidDisappear(Bool(animated))
-        
-        print("swag")
     }
 
 
